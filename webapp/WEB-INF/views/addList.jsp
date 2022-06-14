@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>방명록</title>
 <link href="/guestbook3/assets/css/basicForm.css" rel="stylesheet" type="text/css">
-<link href="/guestbook3/assets/css/guestbook.css" rel="stylesheet" type="text/css">
+<link href="/guestbook3/assets/css/content.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -79,7 +79,7 @@
 								<td>${guestVo.no }</td>
 								<td>${guestVo.name }</td>
 								<td>${guestVo.regDate }</td>
-								<td><a href="/guestbook3/deleteForm/${guestVo.no}">삭제</a></td>
+								<td><a href="/guestbook3/deleteForm?no=${guestVo.no}">삭제</a></td>
 							</tr>
 							<tr>
 								<td colspan=4 class="text-left">${guestVo.content }</td>

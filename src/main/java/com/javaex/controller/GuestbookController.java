@@ -2,65 +2,59 @@ package com.javaex.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.javaex.dao.GuestbookDao;
+import com.javaex.service.GuestbookService;
 import com.javaex.vo.GuestbookVo;
 
 @Controller
 public class GuestbookController {
+	
+	@Autowired 
+	private GuestbookService guestbookService;
 
 	// 방명록 삭제
-	@RequestMapping(value = "/delete/{no}", method = { RequestMethod.GET, RequestMethod.POST })
-	public String delete(Model model, @PathVariable("no") int no, @RequestParam("password") String password) {
+	@RequestMapping(value = "/delete", method = { RequestMethod.GET, RequestMethod.POST })
+	public String delete(Model model, @ModelAttribute GuestbookVo guestbookVo) {
 		System.out.println("GuestbookController>delete()");
 
-		GuestbookDao dao = new GuestbookDao();
-		GuestbookVo vo = new GuestbookVo(no, password);
-
-		GuestbookVo guestVo = dao.checkGuest(vo);
+		GuestbookVo guestVo = guestbookService.checkGuest(guestbookVo);
 
 		if (guestVo != null) {
-			dao.delete(vo);
+			guestbookService.delete(guestbookVo);
 			return "redirect:/addList";
 		} else {
-			vo = dao.getGuest(no);
-			model.addAttribute("vo", vo);
+			guestbookService.getGuest(guestbookVo.getNo());
+			model.addAttribute("vo", guestbookVo);
 			return "deleteForm";
 		}
 	}
 
 	// 방명록 삭제폼
-	@RequestMapping(value = "/deleteForm/{no}", method = { RequestMethod.GET, RequestMethod.POST })
-	public String deleteForm(Model model, @PathVariable("no") int no) {
+	@RequestMapping(value = "/deleteForm", method = { RequestMethod.GET, RequestMethod.POST })
+	public String deleteForm(Model model, @RequestParam("no") int no) {
 		System.out.println("GuestbookController>deleteForm()");
 
-		GuestbookDao dao = new GuestbookDao();
-		GuestbookVo vo = dao.getGuest(no);
+		GuestbookVo guestbookVo = guestbookService.getGuest(no);
 
-		model.addAttribute("vo", vo);
+		model.addAttribute("guestbookVo", guestbookVo);
 
 		return "/deleteForm";
 	}
 
 	// 방명록 등록
 	@RequestMapping(value = "/add", method = { RequestMethod.GET, RequestMethod.POST })
-	public String add(@RequestParam("name") String name, @RequestParam("password") String password,
-			@RequestParam("content") String content) {
+	public String add(@ModelAttribute GuestbookVo guestbookVo) {
 
 		System.out.println("GuestbookController>add()");
 
-		GuestbookDao dao = new GuestbookDao();
-		GuestbookVo vo = new GuestbookVo();
-		vo.setName(name);
-		vo.setPassword(password);
-		vo.setContent(content);
-		dao.add(vo);
+		guestbookService.add(guestbookVo);
 
 		return "redirect:/addList";
 	}
@@ -70,8 +64,7 @@ public class GuestbookController {
 	public String list(Model model) {
 		System.out.println("GuestbookController>addList()");
 
-		GuestbookDao dao = new GuestbookDao();
-		List<GuestbookVo> guestList = dao.getGuestList();
+		List<GuestbookVo> guestList = guestbookService.getGuestList();
 
 		model.addAttribute("guestList", guestList);
 

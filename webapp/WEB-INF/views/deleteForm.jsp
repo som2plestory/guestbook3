@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>방명록 삭제</title>
 <link href="/guestbook3/assets/css/basicForm.css" rel="stylesheet" type="text/css">
-<link href="/guestbook3/assets/css/guestbook.css" rel="stylesheet" type="text/css">
+<link href="/guestbook3/assets/css/content.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div id="wrap">
@@ -49,13 +49,13 @@
 							</colgroup>
 							<tbody>
 								<tr>
-									<td>${vo.no}</td>
-									<td>${vo.name}</td>
-									<td class="text-center">${vo.regDate}</td>
+									<td>${guestbookVo.no}</td>
+									<td>${guestbookVo.name}</td>
+									<td class="text-center">${guestbookVo.regDate}</td>
 								</tr>
 								<tr>
 									<td colspan=3 class="guestDeleteContent">
-										${vo.content}
+										${guestbookVo.content}
 									</td>
 								</tr>
 							</tbody>
