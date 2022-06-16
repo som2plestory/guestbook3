@@ -6,8 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>방명록 삭제</title>
-<link href="/guestbook3/assets/css/basicForm.css" rel="stylesheet" type="text/css">
-<link href="/guestbook3/assets/css/content.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/basicForm.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/content.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div id="wrap">
@@ -40,7 +40,8 @@
 				<!-- //content-head -->
 	
 				<div id="guestbook">
-					<form action="/guestbook3/delete/${no}" method="post">
+					<form action="/guestbook3/delete" method="post">
+						<input type="hidden" name="no" value="${guestbookVo.no}">
 						<table id="guestInfo">
 							<colgroup>
 								<col style="width: 10%;">

@@ -5,8 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>방명록</title>
-<link href="/guestbook3/assets/css/basicForm.css" rel="stylesheet" type="text/css">
-<link href="/guestbook3/assets/css/content.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/basicForm.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/content.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>

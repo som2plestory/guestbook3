@@ -25,13 +25,12 @@ public class GuestbookController {
 		System.out.println("GuestbookController>delete()");
 
 		GuestbookVo guestVo = guestbookService.checkGuest(guestbookVo);
-
 		if (guestVo != null) {
-			guestbookService.delete(guestbookVo);
+			guestbookService.delete(guestVo); //=guestbookVo
 			return "redirect:/addList";
 		} else {
-			guestbookService.getGuest(guestbookVo.getNo());
-			model.addAttribute("vo", guestbookVo);
+			guestVo = guestbookService.getGuest(guestbookVo.getNo());
+			model.addAttribute("guestbookVo", guestVo);
 			return "deleteForm";
 		}
 	}

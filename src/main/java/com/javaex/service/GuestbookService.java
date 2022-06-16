@@ -50,9 +50,8 @@ public class GuestbookService {
 	//방명록 1개 정보(비밀번호 확인)
 	public GuestbookVo checkGuest(GuestbookVo guestbookVo) {
 		
-		guestbookDao.checkGuest(guestbookVo);
-		
-		return guestbookVo;
+		GuestbookVo guestVo = guestbookDao.checkGuest(guestbookVo);
+		return guestVo;
 	}
 	
 	
